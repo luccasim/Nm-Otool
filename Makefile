@@ -1,4 +1,4 @@
-NAME	= 	$(NAME1) $(NAME2)
+NAME	= 	$(NAME1) #$(NAME2)
 NAME1 	=	ft_nm
 NAME2	=	ft_otool
 
