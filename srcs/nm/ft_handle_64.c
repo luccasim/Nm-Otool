@@ -1,35 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_handle_64.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: luccasim <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/12 17:01:10 by luccasim          #+#    #+#             */
-/*   Updated: 2016/09/12 17:01:12 by luccasim         ###   ########.fr       */
+/*   Created: 2016/09/12 17:00:31 by luccasim          #+#    #+#             */
+/*   Updated: 2016/09/12 17:00:37 by luccasim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_nm.h"
-#include "libft.h"
-#include <sys/mman.h>
 
-int		main(int ac, char **av)
+void	ft_handle_64(struct mach_header_64 *header)
 {
-	char	*file;
-	char	*opt;
-	char	buf[ft_strlen(opt)];
-
-	opt = "j";
-	ac = ft_options(&av, opt, buf, 0);
-	if (ac)
-	{
-		while (*av)
-		{
-			file = *av;
-			ft_nm(file);
-			av++;
-		}
-	}
-	return (0);
+	(void)header;
+	ft_printf("Ceci est un ficher 64 bit !\n");
 }

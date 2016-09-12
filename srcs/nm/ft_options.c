@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_options.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: luccasim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/09/12 17:01:02 by luccasim          #+#    #+#             */
+/*   Updated: 2016/09/12 17:01:05 by luccasim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 #include "libft.h"
 #include "ft_nm.h"
@@ -10,14 +22,15 @@ static int	insert_buffer(char *buf, char c)
 	return (SUCCES);
 }
 
-static int	options_loop(char *str, char *option, char *buf)
+static int	options_loop(char *str, char *option, char *buf, uint32_t *flag)
 {
-	char *res;
-
+	if (*str != '-' || !option)
+		return (SUCCES);
 	while (*str)
 	{
-		res = ft_strchr(option, *str);
-		if (!res)
+		if (*str == '-')
+			str++;
+		if (!*str || !ft_strchr(option, *str) || *flag)
 		{
 			ft_fprintf(2, "{r:1:%s}: {w:1:%s}\n", str, "illegal option");
 			return (FAIL);
@@ -29,7 +42,7 @@ static int	options_loop(char *str, char *option, char *buf)
 		}
 		++str;
 	}
-	return (SUCCES);
+	return (-1);
 }
 
 static int	number_arg(int32_t nbre_arg, int32_t size)
@@ -48,7 +61,7 @@ static int	number_arg(int32_t nbre_arg, int32_t size)
 	{
 		if (nbre_arg != size)
 		{
-			ft_printf("You have [{r:%i} / {g:%i}] argument(s)\n", nbre_arg,size);
+			ft_printf("You have [{r:%i}/{g:%i}] args\n", nbre_arg, size);
 			return (FAIL);
 		}
 	}
@@ -57,22 +70,29 @@ static int	number_arg(int32_t nbre_arg, int32_t size)
 
 int			ft_options(char ***arg, char *options, char *buf, int32_t size)
 {
-	char		*str;
 	char		**av;
 	uint32_t	nbre_arg;
+	int32_t		res;
 
 	ft_bzero(buf, ft_strlen(options));
 	av = *arg;
 	nbre_arg = 0;
+	av++;
 	while (*av)
 	{
-		str = *av;
-		if (str[0] != '-')
-			*arg = av;
-		else if (options_loop(str, options, buf) == FAIL)
+		res = options_loop(*av, options, buf, &nbre_arg);
+		if (res == FAIL)
 			return (FAIL);
-		av++;
-		nbre_arg++;
+		else if (res < 0)
+			++av;
+		else
+		{
+			if (!nbre_arg)
+				*arg = av;
+			++nbre_arg;
+			++av;
+		}
 	}
+	nbre_arg++;
 	return (number_arg(nbre_arg, size));
 }

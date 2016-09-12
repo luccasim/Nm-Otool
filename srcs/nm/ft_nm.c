@@ -1,13 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_nm.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: luccasim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/09/12 17:00:49 by luccasim          #+#    #+#             */
+/*   Updated: 2016/09/12 17:00:53 by luccasim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_nm.h"
 #include <sys/mman.h>
 #include "libft.h"
 #include <string.h>
+#include <sys/mman.h>
+#include <unistd.h>
 
-static int		is_magic_64(uint32_t magic)
-{
-	return (magic == MH_MAGIC_64 || magic == MH_CIGAM_64);
-}
-
+/*
 static void		init_table(uint32_t *tab, uint32_t size)
 {
 	uint32_t i;
@@ -19,6 +29,7 @@ static void		init_table(uint32_t *tab, uint32_t size)
 		i++;
 	}
 }
+*/
 /*
 static void print_tab(uint32_t *tab, uint32_t size)
 {
@@ -33,6 +44,7 @@ static void print_tab(uint32_t *tab, uint32_t size)
 	ft_printf(ENDL);
 }
 */
+/*
 static void		sort_table(uint32_t *tab, struct nlist_64 *list, char * stab, uint32_t size)
 {
 	uint32_t min;
@@ -58,7 +70,8 @@ static void		sort_table(uint32_t *tab, struct nlist_64 *list, char * stab, uint3
 		}
 	}
 }
-
+*/
+/*
 static void		handle_64(struct mach_header_64 *header)
 {
 	uint32_t				ncmds;
@@ -111,6 +124,7 @@ static void		handle_64(struct mach_header_64 *header)
 		i++;
 	}
 }
+*/
 
 static void		read_binary(char *file)
 {
@@ -119,24 +133,40 @@ static void		read_binary(char *file)
 	uint32_t				magic;
 
 	magic = *(uint32_t *)file;
-	if (is_magic_64(magic))
-		header_64 = (struct mach_header_64 *)file;
-	else
-		header = (struct mach_header *)file;
-	if (is_magic_64(magic))
+	ft_printf("Valeur de MH_MAGIC_64 : {b:1:%llu}\n",MH_MAGIC_64);
+	ft_printf("Valeur de MH_CIGAM_64 : {b:1:%llu}\n",MH_CIGAM_64);
+	ft_printf("Valeur de MH_MAGIC : {b:1:%llu}\n",MH_MAGIC);
+	ft_printf("Valeur de MH_CIGAM : {b:1:%llu}\n",MH_CIGAM);
+	ft_printf("The magic number is {g:1:%llu}\n",magic);
+	if (magic == MH_MAGIC_64)
 	{
-		handle_64(header_64);	
+		header_64 = (struct mach_header_64 *)file;
+		ft_handle_64(header_64);
 	}
 	else
-		ft_printf("{r:1}%s %u\n", "wrong number!", header->magic);
-
+	{
+		header = (struct mach_header *)file;
+		ft_handle(header);
+	}
 }
 
-void	ft_nm(char* const path)
+int		ft_nm(char* const path)
 {
-	if (!path)
-		return ;
-	read_binary(path);
-	munmap(path, sglt_size_file(0, READ));
-	PUTS("Map delete !");
+	int			fd;
+	struct stat	buf;
+	char		*file;
+
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+		return (PERROR("open"));
+	if (fstat(fd, &buf) < 0)
+		return (PERROR("fstat"));
+	if ((buf.st_mode & S_IFMT) == S_IFDIR)
+		return (ft_fprintf(2, "Can't read a directory\n"));
+	file = mmap(0, buf.st_size, PROT_READ, MAP_PRIVATE, fd, 0);
+	if (close(fd) < -1)
+		return (PERROR("close"));
+	read_binary(file);
+	munmap(file, buf.st_size);
+	return (SUCCES);
 }
