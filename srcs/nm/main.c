@@ -18,10 +18,9 @@ int		main(int ac, char **av)
 {
 	char	*file;
 	char	*opt;
-	char	buf[ft_strlen(opt)];
 
 	opt = "j";
-	ac = ft_options(&av, opt, buf, 0);
+	ac = ft_options(&av, opt, 0);
 	if (ac)
 	{
 		while (*av)

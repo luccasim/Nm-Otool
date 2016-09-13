@@ -1,5 +1,5 @@
 NAME	= 	$(NAME1) #$(NAME2)
-NAME1 	=	ft_nm
+NAME1 	=	a.out #ft_nm
 NAME2	=	ft_otool
 
 DSRC_NM =	srcs/nm

@@ -133,10 +133,10 @@ static void		read_binary(char *file)
 	uint32_t				magic;
 
 	magic = *(uint32_t *)file;
-	ft_printf("Valeur de MH_MAGIC_64 : {b:1:%llu}\n",MH_MAGIC_64);
-	ft_printf("Valeur de MH_CIGAM_64 : {b:1:%llu}\n",MH_CIGAM_64);
-	ft_printf("Valeur de MH_MAGIC : {b:1:%llu}\n",MH_MAGIC);
-	ft_printf("Valeur de MH_CIGAM : {b:1:%llu}\n",MH_CIGAM);
+	// ft_printf("Valeur de MH_MAGIC_64 : {b:1:%llu}\n",MH_MAGIC_64);
+	// ft_printf("Valeur de MH_CIGAM_64 : {b:1:%llu}\n",MH_CIGAM_64);
+	// ft_printf("Valeur de MH_MAGIC : {b:1:%llu}\n",MH_MAGIC);
+	// ft_printf("Valeur de MH_CIGAM : {b:1:%llu}\n",MH_CIGAM);
 	ft_printf("The magic number is {g:1:%llu}\n",magic);
 	if (magic == MH_MAGIC_64)
 	{

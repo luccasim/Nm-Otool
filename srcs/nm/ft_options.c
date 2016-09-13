@@ -14,12 +14,29 @@
 #include "libft.h"
 #include "ft_nm.h"
 
-static int	insert_buffer(char *buf, char c)
+static char	*handle_sglt(char c, uint32_t act)
 {
-	while (*buf)
-		buf++;
-	*buf = c;
-	return (SUCCES);
+	static uint32_t off = 0;
+	static char		sglt[100];
+
+	if (act == 0)
+		ft_bzero(sglt, 100);
+	if (act == 1)
+	{
+		if (off == 100)
+		{
+			ft_error("Option SGLT", "Buffer_size is full");
+			return (sglt);
+		}
+		sglt[off] = c;
+		off++;
+	}
+	return (sglt);
+}
+
+char		*ft_options_sglt(void)
+{
+	return (handle_sglt(0, 3));
 }
 
 static int	options_loop(char *str, char *option, char *buf, uint32_t *flag)
@@ -31,14 +48,11 @@ static int	options_loop(char *str, char *option, char *buf, uint32_t *flag)
 		if (*str == '-')
 			str++;
 		if (!*str || !ft_strchr(option, *str) || *flag)
-		{
-			ft_fprintf(2, "{r:1:%s}: {w:1:%s}\n", str, "illegal option");
-			return (FAIL);
-		}
+			return (ft_error(str, "illegal option"));
 		else
 		{
 			if (ft_strchr(buf, *str) == NULL)
-				insert_buffer(buf, *str);
+				handle_sglt(*str, 1);
 		}
 		++str;
 	}
@@ -68,19 +82,19 @@ static int	number_arg(int32_t nbre_arg, int32_t size)
 	return (nbre_arg);
 }
 
-int			ft_options(char ***arg, char *options, char *buf, int32_t size)
+int			ft_options(char ***arg, char *opt, int32_t size)
 {
 	char		**av;
 	uint32_t	nbre_arg;
 	int32_t		res;
 
-	ft_bzero(buf, ft_strlen(options));
+	handle_sglt(0, 0);
 	av = *arg;
 	nbre_arg = 0;
 	av++;
 	while (*av)
 	{
-		res = options_loop(*av, options, buf, &nbre_arg);
+		res = options_loop(*av, opt, ft_options_sglt(), &nbre_arg);
 		if (res == FAIL)
 			return (FAIL);
 		else if (res < 0)

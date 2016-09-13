@@ -15,8 +15,9 @@
 # define FAIL		0
 # define SUCCES		1
 
-
-int		ft_options(char ***av, char *options, char *buf, int32_t size);
+int		ft_error(char *error, char *msg);
+int		ft_options(char ***av, char *options, int32_t size);
+char	*ft_options_sglt(void);
 void	ft_handle_64(struct mach_header_64 *header);
 void	ft_handle(void *header);
 int		ft_nm(char* const buf);
