@@ -28,8 +28,7 @@ static char	*handle_sglt(char c, uint32_t act)
 			ft_error("Option SGLT", "Buffer_size is full");
 			return (sglt);
 		}
-		sglt[off] = c;
-		off++;
+		sglt[off++] = c;
 	}
 	return (sglt);
 }

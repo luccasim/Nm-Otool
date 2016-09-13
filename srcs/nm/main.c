@@ -19,7 +19,7 @@ int		main(int ac, char **av)
 	char	*file;
 	char	*opt;
 
-	opt = "j";
+	opt = "jr";
 	ac = ft_options(&av, opt, 0);
 	if (ac)
 	{
