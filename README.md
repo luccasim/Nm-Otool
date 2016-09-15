@@ -1,8 +1,11 @@
 # Nm-Otool
 
 # Sources
-http://opensource.apple.com//source/xnu/xnu-1456.1.26/EXTERNAL_HEADERS/mach-o/nlist.h
-http://opensource.apple.com//source/xnu/xnu-1456.1.26/EXTERNAL_HEADERS/mach-o/loader.h
+http://opensource.apple.com/source/cctools/cctools-698.1/include/mach-o/
+http://opensource.apple.com/source/cctools/cctools-698.1/include/mach-o/loader.h
+http://opensource.apple.com/source/cctools/cctools-698.1/include/mach-o/fat.h
+http://opensource.apple.com/source/cctools/cctools-698.1/include/mach-o/nlist.h
+http://opensource.apple.com/source/cctools/cctools-698.1/include/mach-o/ranlib.h
 http://lowlevelbits.org/parsing-mach-o-files/
 
 # Other
