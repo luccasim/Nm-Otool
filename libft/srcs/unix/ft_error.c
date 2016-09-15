@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_random.h                                        :+:      :+:    :+:   */
+/*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: luccasim <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/07/20 03:57:24 by luccasim          #+#    #+#             */
-/*   Updated: 2016/07/20 03:57:27 by luccasim         ###   ########.fr       */
+/*   Created: 2016/09/13 14:05:54 by luccasim          #+#    #+#             */
+/*   Updated: 2016/09/13 14:06:00 by luccasim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_RANDOM_H
-# define FT_RANDOM_H
+#include "ft_unix.h"
 
-# define RAND(a, b) ft_rand_ab(a, b)
-
-int		ft_random(void);
-int		ft_rand(int a);
-int		ft_rand_ab(int a, int b);
-
-#endif
+int		ft_error(char *error, char *msg)
+{
+	if (!error)
+		ft_fprintf(2, "{r:1:%s}\n", msg);
+	else if (!msg)
+		ft_fprintf(2, "{r:1:%s}: {w:1:%s}\n", error, "error");
+	else
+		ft_fprintf(2, "{r:1:%s}: {w:1:%s}\n", error, msg);
+	return (FAIL);
+}

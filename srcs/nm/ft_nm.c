@@ -16,6 +16,13 @@
 #include <string.h>
 #include <sys/mman.h>
 #include <unistd.h>
+#include <mach-o/fat.h>
+#include <mach-o/ranlib.h>
+
+static int is_fat(uint32_t magic) 
+{
+  return magic == FAT_MAGIC || magic == FAT_CIGAM;
+}
 
 static void		read_binary(char *file)
 {
@@ -25,7 +32,11 @@ static void		read_binary(char *file)
 
 	magic = *(uint32_t *)file;
 	ft_printf("The magic number is {g:1:%llu}\n",magic);
-	if (magic == MH_MAGIC_64)
+	if (is_fat(magic))
+	{
+		PUTS("It's a fat header!");
+	}
+	if (magic == MH_MAGIC_64 || magic == MH_CIGAM_64)
 	{
 		header_64 = (struct mach_header_64 *)file;
 		ft_handle_64(header_64);
@@ -37,7 +48,7 @@ static void		read_binary(char *file)
 	}
 }
 
-int		ft_nm(char* const path)
+int				ft_nm(char* const path)
 {
 	int			fd;
 	struct stat	buf;

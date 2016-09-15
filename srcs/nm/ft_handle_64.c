@@ -20,6 +20,8 @@ static int	sort_rules(uint32_t *id, struct nlist_64 *l, char *st, uint32_t *t)
 	char 		*opt;
 
 	opt = ft_options_sglt();
+	if (!opt)
+		return (ft_strcmp(s1, s2) > 0);
 	s1 = st + l[t[id[0]]].n_un.n_strx;
 	s2 = st + l[t[id[1]]].n_un.n_strx;
 	if (ft_strchr(opt, 'r'))

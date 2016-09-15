@@ -1,4 +1,5 @@
 # Nm-Otool
+MAJ libft
 
 # Sources
 http://opensource.apple.com//source/xnu/xnu-1456.1.26/EXTERNAL_HEADERS/mach-o/nlist.h

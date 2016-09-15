@@ -42,5 +42,6 @@ void			*ft_memmove(void *s1, const void *s2, size_t n)
 		overlap_static(s1, s2, n);
 	else
 		overlap_dynamique(s1, s2, n, tmp);
+	free(tmp);
 	return (s1);
 }

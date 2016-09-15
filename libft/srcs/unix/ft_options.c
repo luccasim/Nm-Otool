@@ -10,26 +10,33 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_unix.h"
 #include "libft.h"
-#include "ft_nm.h"
 
 static char	*handle_sglt(char c, uint32_t act)
 {
+	static uint32_t	flag = 0;
 	static uint32_t off = 0;
-	static char		sglt[100];
+	static char		sglt[OPT_BUF_SIZE];
 
 	if (act == 0)
-		ft_bzero(sglt, 100);
+	{
+		flag = 0;
+		off = 0;
+		ft_bzero(sglt, OPT_BUF_SIZE);
+	}
 	if (act == 1)
 	{
-		if (off == 100)
+		if (off == OPT_BUF_SIZE)
 		{
 			ft_error("Option SGLT", "Buffer_size is full");
 			return (sglt);
 		}
 		sglt[off++] = c;
+		flag = 1;
 	}
+	if (act == 3)
+		return ((flag) ? sglt : NULL);
 	return (sglt);
 }
 
@@ -65,16 +72,13 @@ static int	number_arg(int32_t nbre_arg, int32_t size)
 	if (size < 0)
 	{
 		if (nbre_arg > size)
-		{
-			ft_printf("Too much arguments\n");
-			return (FAIL);
-		}
+			return (ERROR("Too much arguments"));
 	}
 	else
 	{
 		if (nbre_arg != size)
 		{
-			ft_printf("You have [{r:%i}/{g:%i}] args\n", nbre_arg, size);
+			ft_fprintf(2, "You have [{r:%i}/{g:%i}] args\n", nbre_arg, size);
 			return (FAIL);
 		}
 	}
@@ -93,7 +97,7 @@ int			ft_options(char ***arg, char *opt, int32_t size)
 	av++;
 	while (*av)
 	{
-		res = options_loop(*av, opt, ft_options_sglt(), &nbre_arg);
+		res = options_loop(*av, opt, handle_sglt(0, 4), &nbre_arg);
 		if (res == FAIL)
 			return (FAIL);
 		else if (res < 0)
