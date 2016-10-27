@@ -7,7 +7,7 @@ int		ft_otool(char const *file, char const *path)
 	magic = *(int*)file;
 	if (IS_MACHO_64(magic))
 		handle_64(file, path);
-	if (IS_MACHO(magic))
+	else if (IS_MACHO(magic))
 		handle_32(file, path);
 	else if (IS_FAT(magic))
 		handle_fat(file);
