@@ -44,8 +44,6 @@ int 			main(int ac, char **av)
 	struct stat	buf;
 
 	ac = ft_options(&av, NM_OPTIONS, 0);
-	path = 0;
-	file = 0;
 	if (ac)
 	{
 		while (*av)
@@ -54,6 +52,8 @@ int 			main(int ac, char **av)
 			file = 0;
 			if (ac == 1)
 				path = "a.out";
+			if (ac > 1)
+				ft_printf("\n%s:\n",path);
 			if (mmap_file(path, &buf, &file) == SUCCESS)
 			{
 				ft_nm(file, path);

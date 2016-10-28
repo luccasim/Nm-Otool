@@ -6,7 +6,6 @@ static int	print_section(struct section_64 *s, char const *h)
 	uint64_t	j;
 	uint64_t	addr;
 	uint64_t	off;
-	char		c;
 
 	i = 0;
 	addr = s->addr;
@@ -14,11 +13,10 @@ static int	print_section(struct section_64 *s, char const *h)
 	while (i < s->size)
 	{
 		j = 0;
-		ft_printf("%0.16llx \t", addr);
+		ft_printf("%0.16llx\t", addr);
 		while (j < 16 && i + j < s->size)
 		{
-			c = *(h + off);
-			ft_printf("%.2hhx ", c);
+			ft_printf("%.2hhx ", *(h + off));
 			off++;
 			j++;
 		}
@@ -68,6 +66,5 @@ int			handle_64(char const *file, char const *name)
 		lc = (void*)lc + lc->cmdsize;
 		i++;
 	}
-	// ft_printf("\n");
 	return (SUCCESS);
 }

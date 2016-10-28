@@ -14,7 +14,7 @@ static int	print_section(struct section *s, char const *h)
 	while (i < s->size)
 	{
 		j = 0;
-		ft_printf("%0.8llx \t", addr);
+		ft_printf("%0.8llx\t", addr);
 		while (j < 16 && i + j < s->size)
 		{
 			c = *(h + off);
