@@ -1,7 +1,9 @@
 #include <stdio.h>
 
+int globale =  42;
+
 int main(void)
 {
-	puts("Test facile");
+	printf("(%i)\n", globale);
 	return (0);
 }

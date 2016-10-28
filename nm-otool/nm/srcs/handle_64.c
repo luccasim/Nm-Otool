@@ -1,6 +1,6 @@
 #include "ft_nm.h"
 
-static int	sort_rules(uint32_t *id, struct nlist_64 *l, char *st, uint32_t *t)
+static int	sort_rules(uint32_t *id, struct nlist_64 *l, char *st, int32_t *t)
 {
 	char 		*s1;
 	char 		*s2;
@@ -15,14 +15,10 @@ static int	sort_rules(uint32_t *id, struct nlist_64 *l, char *st, uint32_t *t)
 		return (l[t[id[0]]].n_value > l[t[id[1]]].n_value);
 	if (!opt)
 		return (ret > 0);
-	if (ft_strchr(opt, 'p'))
-		return (0);
-	if (ft_strchr(opt, 'r'))
-		return (ret < 0);
 	return (ret > 0);
 }
 
-static void	sort_table(uint32_t *tab, struct nlist_64 *l, char *st, uint32_t s)
+static void	sort_table(int32_t *tab, struct nlist_64 *l, char *st, uint32_t s)
 {
 	uint32_t	i;
 	uint32_t 	j;
@@ -54,7 +50,7 @@ static void lc_symtab_64(struct symtab_command *sym, void *header, t_list *sl)
 	struct nlist_64 *list;
 	char			*st;
 	uint32_t		i;
-	uint32_t		tab[sym->nsyms];
+	int32_t		tab[sym->nsyms];
 
 	list = header + sym->symoff;
 	st = header + sym->stroff;
@@ -64,7 +60,12 @@ static void lc_symtab_64(struct symtab_command *sym, void *header, t_list *sl)
 		tab[i] = i;
 		i++;
 	}
-	sort_table(tab, list, st, sym->nsyms);
+	if (!ft_is_option('p'))
+	{
+		sort_table(tab, list, st, sym->nsyms);
+		if(ft_is_option('r'))
+			ft_tab_reverse(tab, i);
+	}
 	i = 0;
 	while (i < sym->nsyms)
 	{

@@ -5,6 +5,7 @@
 # include "ft_unix.h"
 # include "libft.h"
 # include "list.h"
+# include "ft_tool.h"
 # include <sys/stat.h>
 # include <sys/mman.h>
 # include <unistd.h> 
