@@ -5,7 +5,7 @@ static int		munmap_file(char *adr, struct stat *buf)
 	int		error;
 
 	if (!buf || !adr)
-		return (ERROR("munmap_file one parameter given is NULL"));
+		return (PERROR("munmap_file one parameter given is NULL"));
 	error = munmap(adr, buf->st_size);
 	if (error)
 		return (PERROR("munmap"));
@@ -27,7 +27,7 @@ static int		mmap_file(char *path, struct stat *buf, char **addr)
 	if (fstat(fd, buf) < 0)
 		return (PERROR("fstat"));
 	if ((buf->st_mode & S_IFMT) == S_IFDIR)
-		return (ERROR("Can't read a directory"));
+		return (PERROR("Can't read a directory"));
 	file = mmap(0, buf->st_size, PROT_READ, MAP_PRIVATE, fd, 0);
 	if (!file)
 		return (PERROR("mmap"));

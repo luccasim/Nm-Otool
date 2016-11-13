@@ -14,6 +14,6 @@ int		ft_nm(char* const file, char const *path)
 	else if (IS_AR(file))
 		handle_ar(file, path);
 	else
-		return (ERROR("ft_nm can't recognize this file"));
+		return (PERROR("ft_nm can't recognize this file"));
 	return (SUCCESS);
 }
