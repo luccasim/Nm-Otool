@@ -23,16 +23,16 @@ static int		mmap_file(char *path, struct stat *buf, char **addr)
 		return (FAIL);
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
-		return (PERROR("open"));
-	if (fstat(fd, buf) < 0)
-		return (PERROR("fstat"));
+		return (PERROR("open() failed"));
+	if (fstat(fd, buf) != 0)
+		return (PERROR("fstat() failed"));
 	if ((buf->st_mode & S_IFMT) == S_IFDIR)
 		return (PERROR("Can't read a directory"));
 	file = mmap(0, buf->st_size, PROT_READ, MAP_PRIVATE, fd, 0);
 	if (!file)
-		return (PERROR("mmap"));
+		return (PERROR("mmap() failed"));
 	if (close(fd) < 0)
-		return (PERROR("close"));
+		return (PERROR("close() failed"));
 	*addr = file;
 	return (SUCCESS);
 }

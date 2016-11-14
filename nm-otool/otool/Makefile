@@ -14,18 +14,17 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@make -C ../libft/
-	$(CC) -o $(NAME) $(OBJ) $(LIB)
+	@$(CC) -o $(NAME) $(OBJ) $(LIB)
 	@echo "\033[32;1m$(NAME) created successfully!\033[0m"
 
 $(DOBJ)/%.o:%.c
 	@mkdir -p $(ODIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	@/bin/rm -rf $(DOBJ)
 
 fclean: clean
-	@make -C ../libft/ fclean
 	@/bin/rm -rf $(NAME)
 	@echo "\033[31;1m$(NAME) removes!\033[0m"
 
