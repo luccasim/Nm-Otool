@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handle_32.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: luccasim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/11/22 17:34:58 by luccasim          #+#    #+#             */
+/*   Updated: 2016/11/22 17:35:00 by luccasim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_otool.h"
 
 static int	print_section(struct section *s, char const *h)
@@ -29,7 +41,7 @@ static int	print_section(struct section *s, char const *h)
 	return (SUCCESS);
 }
 
-static int	lc_seg_32(struct segment_command* sc, char const *h)
+static int	lc_seg_32(struct segment_command *sc, char const *h)
 {
 	uint32_t			i;
 	struct section		*s;
@@ -40,7 +52,8 @@ static int	lc_seg_32(struct segment_command* sc, char const *h)
 	str = SECT_TEXT;
 	while (i < sc->nsects)
 	{
-		if (ft_strequ(s[i].sectname, SECT_TEXT) && ft_strequ(s[i].segname, SEG_TEXT))
+		if (ft_strequ(s[i].sectname, SECT_TEXT)
+			&& ft_strequ(s[i].segname, SEG_TEXT))
 		{
 			ft_printf("Contents of (%s,%s) section\n", SEG_TEXT, SECT_TEXT);
 			print_section(s + i, h);

@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handle_32.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: luccasim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/11/22 16:51:46 by luccasim          #+#    #+#             */
+/*   Updated: 2016/11/22 16:51:49 by luccasim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_nm.h"
 
 static int	sort_rules(uint32_t *id, struct nlist *l, char *st, int32_t *t)
 {
-	char 		*s1;
-	char 		*s2;
-	char 		*opt;
+	char		*s1;
+	char		*s2;
+	char		*opt;
 	int			ret;
 
 	opt = ft_options_sglt();
@@ -21,7 +33,7 @@ static int	sort_rules(uint32_t *id, struct nlist *l, char *st, int32_t *t)
 static void	sort_table(int32_t *tab, struct nlist *l, char *st, uint32_t s)
 {
 	uint32_t	i;
-	uint32_t 	j;
+	uint32_t	j;
 	uint32_t	id[2];
 	uint32_t	tmp;
 
@@ -45,12 +57,12 @@ static void	sort_table(int32_t *tab, struct nlist *l, char *st, uint32_t s)
 	}
 }
 
-static void lc_symtab_32(struct symtab_command *sym, void *header, t_list *sl)
+static void	lc_symtab_32(struct symtab_command *sym, void *header, t_list *sl)
 {
-	struct nlist 	*list;
+	struct nlist	*list;
 	char			*st;
 	uint32_t		i;
-	int32_t		tab[sym->nsyms];
+	int32_t			tab[sym->nsyms];
 
 	list = header + sym->symoff;
 	st = header + sym->stroff;
@@ -63,7 +75,7 @@ static void lc_symtab_32(struct symtab_command *sym, void *header, t_list *sl)
 	if (!ft_is_option('p'))
 	{
 		sort_table(tab, list, st, sym->nsyms);
-		if(ft_is_option('r'))
+		if (ft_is_option('r'))
 			ft_tab_reverse(tab, i);
 	}
 	i = 0;
@@ -74,7 +86,7 @@ static void lc_symtab_32(struct symtab_command *sym, void *header, t_list *sl)
 	}
 }
 
-static void lc_seg_32(struct segment_command *sc, t_list **sl, uint32_t *n)
+static void	lc_seg_32(struct segment_command *sc, t_list **sl, uint32_t *n)
 {
 	uint32_t			i;
 	struct section		*s;

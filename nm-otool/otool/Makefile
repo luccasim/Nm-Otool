@@ -13,12 +13,12 @@ OBJ 	=	$(patsubst %.c, $(DOBJ)/%.o, $(SRC))
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@make -C ../libft/
+	@make -C ../libft/ > /dev/null 2>&1
 	@$(CC) -o $(NAME) $(OBJ) $(LIB)
 	@echo "\033[32;1m$(NAME) created successfully!\033[0m"
 
 $(DOBJ)/%.o:%.c
-	@mkdir -p $(ODIR)
+	@mkdir -p $(ODIR) > /dev/null 2>&1
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:

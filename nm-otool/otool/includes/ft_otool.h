@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_otool.h                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: luccasim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/11/22 17:33:50 by luccasim          #+#    #+#             */
+/*   Updated: 2016/11/22 17:33:52 by luccasim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FT_OTOOL_H
 # define FT_OTOOL_H
 
@@ -7,7 +19,7 @@
 # include "list.h"
 # include <sys/stat.h>
 # include <sys/mman.h>
-# include <unistd.h> 
+# include <unistd.h>
 # include <fcntl.h>
 # include <ar.h>
 # include <mach-o/loader.h>
@@ -31,4 +43,4 @@ int		handle_64(char const *file, char const *name);
 int		handle_fat(char const *file);
 int		handle_ar(char const *file, char const *name);
 
-#endif 
+#endif

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   output_64.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: luccasim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/11/22 16:52:45 by luccasim          #+#    #+#             */
+/*   Updated: 2016/11/22 16:52:49 by luccasim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_nm.h"
 
-static int	check_option(uint64_t *addr, char *symbol)	
+static int	check_option(uint64_t *addr, char *symbol)
 {
 	char	*opt;
 
@@ -30,10 +42,10 @@ static int	check_option(uint64_t *addr, char *symbol)
 int			output_64(void *l, char *st, t_list *sl)
 {
 	char				symbol;
-	uint64_t 			value;
-	uint64_t 			addr;
+	uint64_t			value;
+	uint64_t			addr;
 	uint64_t			name;
-	struct nlist_64 	*list;
+	struct nlist_64		*list;
 
 	list = (struct nlist_64*)l;
 	addr = 1;

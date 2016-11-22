@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   symbol_type.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: luccasim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/11/22 16:53:58 by luccasim          #+#    #+#             */
+/*   Updated: 2016/11/22 16:54:00 by luccasim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_nm.h"
 
-static char section_symbol(int value, t_list *sl)
+static char	section_symbol(int value, t_list *sl)
 {
 	t_list		*tmp;
 	t_section	*section;
@@ -12,7 +24,7 @@ static char section_symbol(int value, t_list *sl)
 	{
 		section = tmp->content;
 		if (section)
-		{	
+		{
 			if (value == section->nb)
 			{
 				if (ft_strequ(section->name, SECT_TEXT))
@@ -28,7 +40,7 @@ static char section_symbol(int value, t_list *sl)
 	return (c);
 }
 
-char 		symbol_type(char value, char sect, char type, t_list *sl)
+char		symbol_type(char value, char sect, char type, t_list *sl)
 {
 	char c;
 
@@ -50,6 +62,6 @@ char 		symbol_type(char value, char sect, char type, t_list *sl)
 	else if ((type & N_TYPE) == N_INDR)
 		c = 'i';
 	if ((type & N_EXT) && c != '?')
-		c = ft_toupper(c);	
+		c = ft_toupper(c);
 	return (c);
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: luccasim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/11/22 16:52:27 by luccasim          #+#    #+#             */
+/*   Updated: 2016/11/22 16:52:29 by luccasim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_nm.h"
 
 static int		mmap_file(char *path, struct stat *buf, char **addr)
@@ -13,6 +25,8 @@ static int		mmap_file(char *path, struct stat *buf, char **addr)
 		return (PERROR("Open() failed"));
 	if (fstat(fd, buf) != 0)
 		return (PERROR("fstat() failed"));
+	if (buf->st_size == 0)
+		return (PERROR("File empty, fuck you!"));
 	if ((buf->st_mode & S_IFMT) == S_IFDIR)
 		return (PERROR("Can't read a directory"));
 	file = mmap(0, buf->st_size, PROT_READ, MAP_PRIVATE, fd, 0);
@@ -37,9 +51,9 @@ static int		munmap_file(char *adr, struct stat *buf)
 	return (SUCCESS);
 }
 
-int 			main(int ac, char **av)
+int				main(int ac, char **av)
 {
-	char 		*path;
+	char		*path;
 	char		*file;
 	struct stat	buf;
 

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handle_fat.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: luccasim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/11/22 16:52:19 by luccasim          #+#    #+#             */
+/*   Updated: 2016/11/22 16:52:22 by luccasim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_nm.h"
 
-static int makeswap(int num)
+static int	makeswap(int num)
 {
 	int		swapped;
 
@@ -34,7 +46,7 @@ static int	read_fat(struct fat_header *header, int swap, uint32_t nbr)
 	return (SUCCESS);
 }
 
-int			handle_fat(char *const file)
+int			handle_fat(char const *file)
 {
 	struct fat_header	*header;
 	int					swap;

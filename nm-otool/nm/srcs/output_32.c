@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   output_32.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: luccasim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/11/22 16:52:36 by luccasim          #+#    #+#             */
+/*   Updated: 2016/11/22 16:52:38 by luccasim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_nm.h"
 
-static int	check_option(uint32_t *addr, char *symbol)	
+static int	check_option(uint32_t *addr, char *symbol)
 {
 	char	*opt;
 
@@ -30,10 +42,10 @@ static int	check_option(uint32_t *addr, char *symbol)
 int			output_32(void *l, char *st, t_list *sl)
 {
 	char				symbol;
-	uint32_t 			value;
-	uint32_t 			addr;
+	uint32_t			value;
+	uint32_t			addr;
 	uint32_t			name;
-	struct nlist 		*list;
+	struct nlist		*list;
 
 	list = (struct nlist *)l;
 	addr = 1;

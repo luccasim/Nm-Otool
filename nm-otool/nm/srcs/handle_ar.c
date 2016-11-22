@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handle_ar.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: luccasim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/11/22 16:52:07 by luccasim          #+#    #+#             */
+/*   Updated: 2016/11/22 16:52:09 by luccasim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_nm.h"
 
 static uint32_t	ar_size(char const *name)
@@ -31,12 +43,11 @@ static int		read_ranlib(char const *file, char const *name, uint32_t nbr)
 
 int				handle_ar(char const *file, char const *name)
 {
-	
 	struct ar_hdr	*ar;
-	int				nbr_obj;
+	int				nobj;
 
 	ar = (void *)file + SARMAG;
-	nbr_obj = *((int *)((void*)ar + sizeof(struct ar_hdr) + ar_size(ar->ar_name)));
-	nbr_obj = nbr_obj / sizeof(struct ranlib);
-	return (read_ranlib(file, name, nbr_obj));
+	nobj = *((int *)((void*)ar + sizeof(struct ar_hdr) + ar_size(ar->ar_name)));
+	nobj = nobj / sizeof(struct ranlib);
+	return (read_ranlib(file, name, nobj));
 }
