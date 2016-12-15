@@ -38,8 +38,11 @@ static int	read_fat(struct fat_header *header, int swap, uint32_t nbr)
 		cpu_type = (swap) ? makeswap(fat_ar[i].cputype) : fat_ar[i].cputype;
 		if (cpu_type == CPU_TYPE_X86_64)
 		{
-			obj += (swap) ? makeswap(fat_ar[i].offset) : fat_ar[i].offset;
-			ft_nm(obj, NULL);
+			if (i < nbr - 1)
+			{
+				obj += (swap) ? makeswap(fat_ar[i].offset) : fat_ar[i].offset;
+				ft_nm(obj, NULL);
+			}
 		}
 		i++;
 	}

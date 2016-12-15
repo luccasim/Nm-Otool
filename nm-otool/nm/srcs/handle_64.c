@@ -12,7 +12,7 @@
 
 #include "ft_nm.h"
 
-static int	sort_rules(uint32_t *id, struct nlist_64 *l, char *st, int32_t *t)
+static int	sort_rules(uint64_t *id, struct nlist_64 *l, char *st, int64_t *t)
 {
 	char		*s1;
 	char		*s2;
@@ -30,12 +30,12 @@ static int	sort_rules(uint32_t *id, struct nlist_64 *l, char *st, int32_t *t)
 	return (ret > 0);
 }
 
-static void	sort_table(int32_t *tab, struct nlist_64 *l, char *st, uint32_t s)
+static void	sort_table(int64_t *tab, struct nlist_64 *l, char *st, uint64_t s)
 {
-	uint32_t	i;
-	uint32_t	j;
-	uint32_t	id[2];
-	uint32_t	tmp;
+	uint64_t	i;
+	uint64_t	j;
+	uint64_t	id[2];
+	uint64_t	tmp;
 
 	j = s;
 	tmp = tab[0];
@@ -61,8 +61,8 @@ static void	lc_symtab_64(struct symtab_command *sym, void *header, t_list *sl)
 {
 	struct nlist_64 *list;
 	char			*st;
-	uint32_t		i;
-	int32_t			tab[sym->nsyms];
+	uint64_t		i;
+	int64_t			tab[sym->nsyms];
 
 	list = header + sym->symoff;
 	st = header + sym->stroff;
@@ -75,8 +75,8 @@ static void	lc_symtab_64(struct symtab_command *sym, void *header, t_list *sl)
 	if (!ft_is_option('p'))
 	{
 		sort_table(tab, list, st, sym->nsyms);
-		if (ft_is_option('r'))
-			ft_tab_reverse(tab, i);
+		// if (ft_is_option('r'))
+		// 	ft_tab_reverse(tab, i);
 	}
 	i = 0;
 	while (i < sym->nsyms)
@@ -86,13 +86,13 @@ static void	lc_symtab_64(struct symtab_command *sym, void *header, t_list *sl)
 	}
 }
 
-static void	lc_seg_64(struct segment_command_64 *sc, t_list **sl, uint32_t *n)
+static void	lc_seg_64(struct segment_command_64 *sc, t_list **sl, uint64_t *n)
 {
-	uint32_t			i;
+	uint64_t			i;
 	struct section_64	*s;
 	t_section			sect;
 	t_list				*new;
-	uint32_t			nb;
+	uint64_t			nb;
 
 	i = 0;
 	new = 0;
@@ -115,8 +115,8 @@ int			handle_64(char const *file)
 	struct mach_header_64		*header;
 	struct load_command			*lc;
 	t_list						*sl;
-	uint32_t					ns;
-	uint32_t					i;
+	uint64_t					ns;
+	uint64_t					i;
 
 	header = (struct mach_header_64 *)file;
 	lc = (struct load_command *)(header + 1);
