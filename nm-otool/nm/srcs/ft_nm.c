@@ -18,13 +18,13 @@ int		ft_nm(char const *file, char const *path)
 
 	magic = *(int *)file;
 	if (IS_MACHO(magic))
-		handle_32(file);
+		return (handle_32(file));
 	else if (IS_MACHO_64(magic))
-		handle_64(file);
+		return (handle_64(file));
 	else if (IS_FAT(magic))
-		handle_fat(file);
+		return (handle_fat(file));
 	else if (IS_AR(file))
-		handle_ar(file, path);
+		return (handle_ar(file, path));
 	else
 		return (PERROR("ft_nm can't recognize this file"));
 	return (SUCCESS);

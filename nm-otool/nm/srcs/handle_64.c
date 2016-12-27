@@ -75,15 +75,12 @@ static void	lc_symtab_64(struct symtab_command *sym, void *header, t_list *sl)
 	if (!ft_is_option('p'))
 	{
 		sort_table(tab, list, st, sym->nsyms);
-		// if (ft_is_option('r'))
-		// 	ft_tab_reverse(tab, i);
+		if (ft_is_option('r'))
+			ft_tab_reverse_64(tab, i);
 	}
 	i = 0;
 	while (i < sym->nsyms)
-	{
-		output_64(&list[tab[i]], st, sl);
-		i++;
-	}
+		output_64(&list[tab[i++]], st, sl);
 }
 
 static void	lc_seg_64(struct segment_command_64 *sc, t_list **sl, uint64_t *n)

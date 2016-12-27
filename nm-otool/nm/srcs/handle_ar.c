@@ -29,7 +29,6 @@ static int		read_ranlib(char const *file, char const *name, uint32_t nbr)
 
 	i = 0;
 	ar = (void*)file + SARMAG;
-	PUTSTR(ar->ar_name);
 	ranlib = (void*)ar + sizeof(struct ar_hdr) + ar_size(ar->ar_name) + 4;
 	while (i < nbr)
 	{

@@ -50,8 +50,8 @@ static int	lc_seg_64(struct segment_command_64 *sc, char const *h)
 	str = SECT_TEXT;
 	while (i < sc->nsects)
 	{
-		if (ft_strequ(s[i].sectname, SECT_TEXT)
-			&& ft_strequ(s[i].segname, SEG_TEXT))
+		if (ft_strequ(s[i].segname, SEG_TEXT)
+			&& ft_strequ(s[i].sectname, SECT_TEXT))
 		{
 			ft_printf("Contents of (%s,%s) section\n", SEG_TEXT, SECT_TEXT);
 			print_section(s + i, h);
@@ -72,7 +72,7 @@ int			handle_64(char const *file, char const *name)
 	i = 0;
 	if (name)
 		ft_printf("%s:\n", name);
-	while (i < header->ncmds)
+	while (lc && i < header->ncmds - 3)
 	{
 		if (lc->cmd == LC_SEGMENT_64)
 			lc_seg_64((struct segment_command_64*)lc, file);
